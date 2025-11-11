@@ -69,11 +69,25 @@ class Usuario{
         $resultado->execute();
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function eliminarUsuario($bd,$id_usuario){
         $sql = "DELETE FROM usuario WHERE id_usuario = :id_usuario";
         $resultado = $bd->prepare($sql);
         $resultado->bindParam(':id_usuario', $id_usuario);
         $resultado->execute();
+
+        $bd->exec("SET @count = 0");
+        $bd->exec("UPDATE usuario SET id_usuario = @count := @count + 1");
+        $bd->exec("ALTER TABLE usuario AUTO_INCREMENT = 1");
+
+    }
+
+    public function verificarUsuario($bd){
+        $sql = "SELECT * FROM usuario WHERE email = :email";
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':email', $this->email);
+        $resultado->execute();
+        return $resultado->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>

@@ -16,32 +16,38 @@ $producto = Producto::obtenerProducto($bd);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Productos</title>
+    <link rel="stylesheet" href="../CSS/sistema.css">
 </head>
 <body>
     <div>
+        <div class="acciones">
+        <div class="accion-box">
+        <a href="../Vistas/agregarProducto.php">Agregar Producto</a>
+        </div></div>
+        
         <form id="producto"  action="crudProducto.php" method="post">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Codigo</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Precio</th>
-            </tr>
-            <?php
-                if($producto){
-                    foreach($producto as $p){
-                        echo '<tr><td>'.$p["id_producto"].'</td><td>'.$p["codigo"].'</td>
-                        <td>'.$p["nombre"].'</td><td>'.$p["descripcion"].'</td><td>'.$p["precio"].'</td>
-                        <td><button name="id_producto" type="submit" value="'.$p["id_producto"].'">Eliminar</button></td></tr>';
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                </tr>
+                <?php
+                    if($producto){
+                        foreach($producto as $p){
+                            echo '<tr><td>'.$p["id_producto"].'</td><td>'.$p["codigo"].'</td>
+                            <td>'.$p["nombre"].'</td><td>'.$p["descripcion"].'</td><td>'.$p["precio"].'</td>
+                            <td><button name="id_producto" type="submit" value="'.$p["id_producto"].'"class="eliminar">Eliminar</button></td></tr>';
+                        }
+                    }else{
+                        echo '<p>No hay productos registrados</p>';
                     }
-                }else{
-                    echo '<p>No hay productos registrados</p>';
-                }
-            ?>
+                ?>
             
-        </table>
+            </table>
         </form>
     </div>
 </body>

@@ -1,34 +1,50 @@
 <?php
-
-class Stock{
+class Stock {
+    public int $id_producto;
     public int $cantidad;
 
-    public function __construct($cantidad){
+    public function __construct($id_producto, $cantidad) {
+        $this->id_producto = $id_producto;
         $this->cantidad = $cantidad;
     }
 
-    public function subirStock($bd) {
-        $consulta_subir= "INSERT INTO stock (cantidad) VALUES (:cantidad)";
-        $subir_stock=$bd->prepare($consulta_subir);
-        $subir_stock->bindParam(":cantidad", $this->cantidad, PDO::PARAM_INT);
-        $subir_stock->execute();
+    public function registrarEntrada($bd) {
+        $sql = "INSERT INTO stock (id_producto, cantidad) VALUES (:id_producto, :cantidad)";
+        $stmt = $bd->prepare($sql);
+        $stmt->bindParam(':id_producto', $this->id_producto, PDO::PARAM_INT);
+        $stmt->bindParam(':cantidad', $this->cantidad, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public function cambiarStock($bd,$id_stock){
-        $sql = "UPDATE stock SET cantidad = :cantidad WHERE id_stock = :id_stock";
-        $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':id_stock', $id_stock);
-        $resultado->bindParam(':cantidad', $cantidad_nueva);
-        $resultado->execute();
-
+    public function registrarSalida($bd) {
+        $cantidad_salida = -abs($this->cantidad);
+        $sql = "INSERT INTO stock (id_producto, cantidad) VALUES (:id_producto, :cantidad)";
+        $stmt = $bd->prepare($sql);
+        $stmt->bindParam(':id_producto', $this->id_producto, PDO::PARAM_INT);
+        $stmt->bindParam(':cantidad', $cantidad_salida, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public function eliminarStock($bd,$id_stock){
+    public static function obtenerStockActual($bd) {
+        $sql = "SELECT 
+                    p.id_producto,
+                    p.nombre AS nombre_producto,
+                    SUM(CASE WHEN m.ingreso = 1 THEN m.cantidad ELSE -m.cantidad END) AS cantidad_actual
+                FROM movimiento m
+                INNER JOIN producto p ON m.id_producto = p.id_producto
+                GROUP BY p.id_producto, p.nombre
+                ORDER BY p.id_producto";
+
+        $stmt = $bd->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function eliminarStock($bd, $id_stock) {
         $sql = "DELETE FROM stock WHERE id_stock = :id_stock";
-        $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':id_stock', $id_stock);
-        $resultado->execute();
+        $stmt = $bd->prepare($sql);
+        $stmt->bindParam(':id_stock', $id_stock, PDO::PARAM_INT);
+        $stmt->execute();
     }
-
-}
+} 
 ?>

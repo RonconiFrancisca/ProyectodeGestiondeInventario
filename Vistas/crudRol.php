@@ -16,28 +16,34 @@ $rol = Rol::obtenerRol($bd);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Roles</title>
+    <link rel="stylesheet" href="../CSS/sistema.css">
 </head>
 <body>
     <div>
+        <div class="acciones">
+        <div class="accion-box">
+            <a href="../Vistas/agregarRol.php">Agregar Rol</a>
+        </div></div>
+       
         <form id="rol"  action="crudRol.php" method="post">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-            </tr>
-            <?php
-                if($rol){
-                    foreach($rol as $r){
-                        echo '<tr><td>'.$r["id_rol"].'</td><td>'.$r["nombre"].'</td>
-                        <td><button name="id_rol" type="submit" value="'.$r["id_rol"].'">Eliminar</button></td></tr>';
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php
+                    if($rol){
+                        foreach($rol as $r){
+                            echo '<tr><td>'.$r["id_rol"].'</td><td>'.$r["nombre"].'</td>
+                            <td><button name="id_rol" type="submit" value="'.$r["id_rol"].'"class="eliminar">Eliminar</button></td></tr>';
+                        }
+                    }else{
+                        echo '<p>No hay rol registradas</p>';
                     }
-                }else{
-                    echo '<p>No hay rol registradas</p>';
-                }
-            ?>
+                ?>
             
-        </table>
+            </table>
         </form>
     </div>
 </body>

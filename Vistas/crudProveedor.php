@@ -16,33 +16,38 @@ $proveedor = Proveedor::obtenerProveedor($bd);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Proveedores</title>
+    <link rel="stylesheet" href="../CSS/sistema.css">
 </head>
 <body>
     <div>
-        <form id="proveedor"  action="crudProveedor.php" method="post">
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
-                <th>Cuit</th>
-            </tr>
-            <?php
-                if($proveedor){
-                    foreach($proveedor as $p){
-                        echo '<tr><td>'.$p["id_proveedor"].'</td><td>'.$p["nombre"].'</td>
-                        <td>'.$p["telefono"].'</td><td>'.$p["direccion"].'</td><td>'.$p["cuit"].'</td>
-                        <td><button name="id_proveedor" type="submit" value="'.$p["id_proveedor"].'">Eliminar</button></td></tr>';
-                    }
-                }else{
-                    echo '<p>No hay proveedores registrados</p>';
-                }
-            ?>
-            
-        </table>
-        </form>
+        <div class="acciones">
+        <div class="accion-box">
+            <a href="../Vistas/agregarProveedor.php">Agregar Proveedor</a>
+        </div></div>
+        
+        <form action="../Vistas/crudProveedor.php" method="post">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
+            <th>Cuit</th>
+            <th>Acciones</th>
+        </tr>
+        <?php 
+        foreach($proveedor as $p){
+            echo '<tr><td>'. $p["id_proveedor"] .'</td><td>'. $p["nombre"] .'</td>
+            <td>'. $p["telefono"] .'</td><td>'. $p["direccion"] .'</td><td>'. $p["cuit"] .'</td><td>
+            <button type="submit" name="id_proveedor" value="'. $p["id_proveedor"] .'"class="eliminar">Eliminar</button>
+            </td></tr>';
+        }
+        ?>
+
+    </table>
+</form>
+
     </div>
 </body>
 </html>

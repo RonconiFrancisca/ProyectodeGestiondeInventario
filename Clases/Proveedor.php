@@ -4,14 +4,14 @@ class Proveedor{
     public string $nombre;
     protected int $telefono;
     public string $direccion;
-    protected int $cuit;
+    protected ?int $cuit;
 
 
-    public function __construct($nombre, $telefono, $direccion, $cuit){
+    public function __construct($nombre, $telefono, $direccion, $cuit = null){
         $this->nombre = $nombre;
         $this->telefono = $telefono;
         $this->direccion = $direccion;
-        $this->cuit = $cuit;
+        $this->cuit = $cuit !== null ? (int)$cuit : null;;
 
     }
 
@@ -62,7 +62,19 @@ class Proveedor{
         $resultado = $bd->prepare($sql);
         $resultado->bindParam(':id_proveedor', $id_proveedor);
         return $resultado->execute();
+
+        $bd->exec("SET @count = 0");
+        $bd->exec("UPDATE proveedor SET id_proveedor = @count := @count + 1");
+        $bd->exec("ALTER TABLE proveedor AUTO_INCREMENT = 1");
+
     }
     
+    public function verificarProveedor($bd){
+        $sql = "SELECT * FROM proveedor WHERE nombre = :nombre";
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':nombre', $this->nombre);
+        $resultado->execute();
+        return $resultado->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>

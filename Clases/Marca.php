@@ -1,9 +1,9 @@
 <?php
 
 class Marca{
-    public string $nombre ;
+    public ?string $nombre ;
 
-    public function __construct($nombre){
+    public function __construct($nombre = null){
         $this->nombre = $nombre;
     }
 
@@ -33,7 +33,20 @@ class Marca{
         $sql = "DELETE FROM marca WHERE  id_marca = :id_marca";
         $resultado = $bd->prepare($sql);
         $resultado->bindParam(':id_marca', $id_marca);
-        $resultado->execute();    
+        $resultado->execute();  
+        
+        $bd->exec("SET @count = 0");
+        $bd->exec("UPDATE marca SET id_marca = @count := @count + 1");
+        $bd->exec("ALTER TABLE marca AUTO_INCREMENT = 1");
+        
+    }
+
+    public function verificarMarca($bd){
+        $sql = "SELECT * FROM marca WHERE nombre = :nombre";
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':nombre', $this->nombre);
+        $resultado->execute();
+        return $resultado->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>
