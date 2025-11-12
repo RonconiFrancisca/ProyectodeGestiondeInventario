@@ -1,0 +1,106 @@
+/* ====== RESET GENERAL ====== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+
+/* ====== CONTENEDOR PRINCIPAL ====== */
+.contenedor-general {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+}
+
+/* ====== SIDEBAR ====== */
+.barra-lateral {
+  flex: 0 0 220px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.barra-lateral h2 {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.barra-lateral ul {
+  list-style: none;
+  padding: 0;
+}
+
+.barra-lateral ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.barra-lateral ul li a:hover {
+  background-color: #111;
+}
+
+/* ====== CONTENIDO PRINCIPAL ====== */
+.contenedor-general > div:not(.barra-lateral) {
+  flex: 1;
+  padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px; /* espacio entre el título y los botones */
+}
+
+/*boton cerrar secion*/
+.cerrar-btn {
+  margin-top: 5rem;
+  margin-left: 2rem;
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #910909;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.cerrar-btn:hover {
+  background-color: #530808;
+}
+
+/*imagenes*/
+.contenedor-imagen {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  opacity: 30%;
+}
+
+.imagen {
+  max-width: 10rem;
+  height: auto;
+}
+
+/*texto*/
+p {
+  font-size: 16px;
+  color: #444;
+  margin-top: 20px;
+}

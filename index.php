@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once "../DataBase.php";     
-include_once "../Clases/Usuario.php";
+include_once "DataBase.php";     
+include_once "Clases/Usuario.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "id_rol" => $usuarioValido["id_rol"]
         ];
 
-        header("Location: paginaInicio.php"); 
+        header("Location:Vistas/paginaInicio.php"); 
         exit;
     } else {
         $error = "Correo o contraseña incorrectos.";
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
   <meta charset="UTF-8">
   <title>Iniciar sesión</title>
-  <link rel="stylesheet" href="../CSS/sistema.css">
+  <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
   <form method="POST" class="form-login">

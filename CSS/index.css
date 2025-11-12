@@ -1,0 +1,75 @@
+/* ====== RESET GENERAL ====== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: radial-gradient(circle at center, #7684ad, #354d7e 85%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Formulario de login*/
+.form-login {
+    background-color: #fff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-login h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* ====== CAMPOS DE ENTRADA ====== */
+.form-login input[type="email"],
+.form-login input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-login input:focus {
+    border-color: #0078d7;
+    box-shadow: 0 0 4px rgba(0,120,215,0.4);
+    outline: none;
+}
+
+/* Boton */
+.form-login button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-login button:hover {
+    background-color: #005a9e;
+}
+
+/* ====== MENSAJE DE ERROR ====== */
+.form-login p {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 14px;
+}

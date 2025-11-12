@@ -29,6 +29,17 @@ class Categoria{
         return $resultado;
     }
 
+    public function editarCategoria($bd) {
+        $sql = "UPDATE categoria SET nombre = :nombre WHERE id_categoria = :id_categoria";
+        
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':nombre', $this->nombre);
+        $resultado->bindParam(':id_categoria', $this->id_categoria);
+        
+        $resultado->execute();
+    }
+
+
     public static function eliminarCategoria($bd,$id_categoria){
         $sql = "DELETE FROM categoria WHERE id_categoria=:id_categoria";
         $resultado = $bd->prepare($sql);

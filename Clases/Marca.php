@@ -29,6 +29,17 @@ class Marca{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function editarMarca($bd) {
+        $sql = "UPDATE marca SET nombre = :nombre WHERE id_marca = :id_marca";
+        
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':nombre', $this->nombre);
+        $resultado->bindParam(':id_marca', $this->id_marca);
+        
+        $resultado->execute();
+    }
+
+
     public static function eliminarMarca($bd, $id_marca){
         $sql = "DELETE FROM marca WHERE  id_marca = :id_marca";
         $resultado = $bd->prepare($sql);

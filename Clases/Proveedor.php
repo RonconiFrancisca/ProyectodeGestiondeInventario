@@ -41,20 +41,17 @@ class Proveedor{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarTelefonoProveedor($bd){
-        $sql = "UPDATE proveedor SET telefono=:telefono WHERE cuit=:cuit";
+    public function editarProveedor($bd) {
+        $sql = "UPDATE proveedor SET nombre = :nombre, cuit = :cuit, direccion = :direccion, 
+                    telefono = :telefono WHERE id_proveedor = :id_proveedor";
+        
         $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':cuit', $cuit);
-        $resultado->bindParam(':telefono', $telefono);
+        $resultado->bindParam(':nombre', $this->nombre); 
+        $resultado->bindParam(':telefono', $this->telefono);
+        $resultado->bindParam(':direccion', $this->direccion);
+        $resultado->bindParam(':cuit', $this->cuit); 
+        $resultado->bindParam(':id_proveedor', $this->id_proveedor);    
         $resultado->execute();
-    }
-
-    public function editarDireccionProveedor($bd){
-        $sql = "UPDATE proveedor SET direccion=:direccion  WHERE cuit=:cuit";
-        $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':cuit', $cuit);
-        $resultado->bindParam(':direccion', $direccion);
-        return $resultado->execute();
     }
 
     public static function eliminarProveedor($bd,$id_proveedor){

@@ -1,23 +1,16 @@
 <?php
-include_once __DIR__.'/../DataBase.php';
-include_once __DIR__.'/../Clases/Marca.php';
+include_once __DIR__ . '/../DataBase.php';
+include_once __DIR__ . '/../Clases/Stock.php';
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $id_marca = $_POST['id_marca'];
-    Marca::eliminarMarca($bd,$id_marca);
-}
-
-$marcas = Marca::obtenerMarca($bd);
-
+$stock_actual = Stock::obtenerStockActual($bd);
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcas</title>
-    <link rel="stylesheet" href="../CSS/marca.css">
+    <title>Stock Actual</title>
+    <link rel="stylesheet" href="../CSS/stock.css">
 </head>
 <body>
     <div class="contenedor-general">
@@ -38,36 +31,40 @@ $marcas = Marca::obtenerMarca($bd);
         </nav>
 
         <div>
-            <h1>Marcas</h1>
+            <h1>Stock de los Productos</h1>
             <div id="contenido">
                 <div class="contenedor-acciones">
                     <div class="acciones">
-                        <div class="accion-box">
-                            <a href="../Vistas/agregarMarca.php">Agregar Marca</a>
+                        <div class="accion-entrada">
+                            <a href="../Stock/registroEntrada.php">Registrar Entrada</a>
+                        </div>
+                        <div class="accion-salida">
+                            <a href="../Stock/registroSalida.php">Registrar Salida</a>
                         </div>
                     </div>
                 </div>
-        
-                <form id="marca"  action="crudMarca.php" method="post">
-                    <table>
+                <table>
+                    <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>Código Producto</th>
                             <th>Nombre</th>
-                            <th>Acciones</th>
+                            <th>Cantidad Actual</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                            if($marcas){
-                                foreach($marcas as $marca){
-                                    echo '<tr><td>'.$marca["id_marca"].'</td><td>'.$marca["nombre"].'</td>
-                                    <td><button name="id_marca" type="submit" value="'.$marca["id_marca"].'"class="eliminar">Eliminar</button>
-                                    <button name="id_marca" type="submit" value="'.$marca["id_marca"].'"class="editar">Editar</button></td></tr>';
-                                }
-                            }else{
-                                echo '<p>No hay marcas registradas</p>';
+                            foreach ($stock_actual as $p) {
+                                if (isset($p['codigo_producto']) && !empty($p['codigo_producto'])) {
+                                    echo "<tr>
+                                    <td>{$p['codigo_producto']}</td>
+                                    <td>{$p['nombre_producto']}</td>
+                                    <td>{$p['cantidad_actual']}</td>
+                                    </tr>";
+                                } 
                             }
                         ?>
-                    </table>
-                </form>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -40,6 +40,15 @@ class Stock {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function editarStock($bd) {
+        $sql = "UPDATE stock SET cantidad = :cantidad WHERE id_stock = :id_stock";
+
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':cantidad', $this->cantidad);
+        $resultado->bindParam(':id_stock', $this->id_stock);
+        $resultado->execute();
+    }
+
     public static function eliminarStock($bd, $id_stock) {
         $sql = "DELETE FROM stock WHERE id_stock = :id_stock";
         $stmt = $bd->prepare($sql);

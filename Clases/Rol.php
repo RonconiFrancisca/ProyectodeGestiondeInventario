@@ -29,6 +29,16 @@ class Rol{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function editarRol($bd) {
+        $sql = "UPDATE rol SET nombre = :nombre WHERE id_rol = :id_rol";
+        
+        $resultado = $bd->prepare($sql);
+        $resultado->bindParam(':nombre', $this->nombre);
+        $resultado->bindParam(':id_rol', $this->id_rol);
+        
+        $resultado->execute();
+    }
+
     public static function eliminarRol($bd, $id_rol){
         $sql = "DELETE FROM rol WHERE  id_rol = :id_rol";
         $resultado = $bd->prepare($sql);

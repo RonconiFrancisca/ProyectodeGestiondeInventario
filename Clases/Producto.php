@@ -49,14 +49,17 @@ class Producto{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarProducto($bd){
-        $sql = "UPDATE producto SET precio=:precio WHERE codigo=:codigo";
+    public function editarProducto($bd) {
+        $sql = "UPDATE producto SET nombre = :nombre, descripcion = :descripcion, precio = :precio WHERE codigo = :codigo";
+        
         $resultado = $bd->prepare($sql);
         $resultado->bindParam(':codigo', $this->codigo);
+        $resultado->bindParam(':nombre', $this->nombre);
+        $resultado->bindParam(':descripcion', $this->descripcion);
         $resultado->bindParam(':precio', $this->precio);
         $resultado->execute();
     }
-
+    
     public static function eliminarProducto($bd, $id_producto) {
         $sql = "DELETE FROM producto WHERE id_producto = :id_producto";
         $resultado = $bd->prepare($sql);

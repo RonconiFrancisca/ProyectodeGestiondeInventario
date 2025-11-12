@@ -15,10 +15,10 @@ include_once __DIR__ . '/../Clases/Rol.php';
 <body>
     <div class="acciones">
     <div class="accion-box">
-        <div class="volverinicio"><a href="../inicio/paginaInicio.php">Volver a Inicio</a></div>
+        <div class="volverinicio"><a href="../Vistas/paginaInicio.php">Volver a Inicio</a></div>
     </div></div> 
 
-    <div class="main-container">
+    <div class="main-content">
     <div class="form-box">
         <p>Agregar Rol</p>
         
