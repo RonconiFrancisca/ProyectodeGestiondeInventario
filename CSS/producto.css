@@ -30,23 +30,31 @@ body {
 .barra-lateral ul {
     list-style: none;
     padding: 0;
+    margin-top: 15px;
 }
 
 .barra-lateral ul li {
-    margin-bottom: 15px;
+    margin-bottom: 0; 
 }
 
 .barra-lateral ul li a {
+    font-family: Tahoma, Geneva, sans-serif; 
+    display: block; /* Hace que el enlace ocupe todo el ancho del li */
     text-decoration: none;
+    padding: 10px 20px; /*tamaño de botón */
+    border-radius: 2px; /* Bordes redondeados */
+    margin-bottom: 4px; /* Separación entre cada "botón" */
     color: #f0f0f0;
-    font-size: 16px;
+    background-color: transparent; /* Fondo transparente por defecto */
+    font-size: 15px;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif;
-    transition: color 0.2s;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .barra-lateral ul li a:hover {
-    color: #00bfff;
+    color: #1e1e2f; /* Cambia el color del texto*/
+    background-color: #00bfff;
+    transform: translateX(5px); 
 }
 
 .cerrar-btn {
@@ -130,8 +138,11 @@ table td:nth-child(n+3) {
     text-align: center; /* centra los botones dentro de cada celda */
 }
 
-table tr:nth-child(even) {
+table tr{
     background-color: #c2e2f3;
+}
+table tr:hover {
+    background-color: #b0d8f0; 
 }
 
 button.eliminar {
@@ -173,4 +184,85 @@ button.editar:hover {
     font-size: 16px;
     margin-top: 20px;
     font-family: "Montserrat", sans-serif;
+}
+
+.ventana {                            
+    display: none;                        /* oculto por defecto */
+    position: fixed;                      /* posición fija */
+    top: 0;                               /* arriba */
+    left: 0;                              /* izquierda */
+    width: 100%;                          /* ancho completo */
+    height: 100%;                         /* alto completo */
+    background-color: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
+    justify-content: center;              /* centrar horizontal */
+    align-items: center;                  /* centrar vertical */
+}
+
+.ventana_contenido {                
+    background-color: #fff;               /* fondo ventana */
+    padding: 25px 30px;                   /* padding interno */
+    border-radius: 8px;                   /* bordes redondeados */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* sombra */
+    width: 500px;                         /* ancho ventana */
+    text-align: center;                   /* centrar contenido */
+}
+
+.ventana_contenido h2 {              
+    margin: 0 0 20px;                     /* espacio inferior */
+    font-size: 22px;                      /* tamaño título */
+    color: #060014;                       /* color título */
+}
+
+.ventana_contenido input[type="text"] {  
+    width: 90%;                           /* ancho input */
+    padding: 10px;                        /* padding interno */
+    margin-bottom: 20px;                  /* separación inferior */
+    border: 1px solid #03073d;            /* borde */
+    border-radius: 8px;                   /* bordes redondeados */
+    font-size: 16px;                      /* tamaño texto */
+}
+
+.ventana_contenido input[type="text"]:focus { 
+    border-color: #007bff;                /* borde azul al enfocar */
+    outline: none;                        /* quitar outline */
+}
+
+.ventana_contenido button {          
+    padding: 10px 18px;                   /* padding botón */
+    margin: 5px;                          /* margen entre botones */
+    border: none;                         /* sin borde */
+    border-radius: 8px;                   /* bordes redondeados */
+    cursor: pointer;                      /* cursor mano */
+    font-size: 15px;                      /* tamaño texto */
+    transition: background-color 0.2s, transform 0.1s; /* transición */
+}
+
+button[name="editar_guardar"] {           
+    background-color: #8bcae7;            
+    color: rgb(32, 30, 30);                         
+}
+
+button[name="editar_guardar"]:hover {     
+    background-color: #0a2f47; 
+    transform: scale(1.03);           
+}
+
+button[name="crear_guardar"] {           
+    background-color: #6cc0e7;            
+    color: rgb(32, 30, 30);                         
+}
+
+button[name="crear_guardar"]:hover {     
+    background-color: #0a2f47; 
+    transform: scale(1.03);           
+}
+
+button[name="cancelar"] {           
+    background-color: #b4554e;            
+    color: rgb(24, 21, 21);                         
+}
+
+button[name="cancelar"]:hover {     
+    background-color: #6b0808; 
+    transform: scale(1.03);           
 }

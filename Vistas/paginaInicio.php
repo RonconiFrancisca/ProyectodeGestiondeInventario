@@ -21,16 +21,17 @@ $usuario = $_SESSION["usuario"];
             <h2>Menú</h2>
             <ul>
                 <li><a href="../Vistas/paginaInicio.php">Inicio</a></li>
-                <li><a href="../Vistas/crudProducto.php" >Productos</a></li>
-                <li><a href="../Vistas/crudMarca.php" >Marcas</a></li>
+                <li><a href="../Vistas/crudProducto.php">Productos</a></li>
+                <li><a href="../Vistas/registroEntrada.php">Entradas</a></li>
+                <li><a href="../Vistas/registroSalida.php">Salidas</a></li>
+                <li><a href="../Vistas/crudMarca.php">Marcas</a></li>
                 <li><a href="../Vistas/crudCategoria.php">Categorías</a></li>
                 <li><a href="../Vistas/crudRol.php">Roles</a></li>
                 <li><a href="../Vistas/crudUsuario.php">Usuarios</a></li>
                 <li><a href="../Vistas/crudProveedor.php">Proveedores</a></li>
                 <li><a href="../Vistas/historialMovimientos.php">Historial de Movimientos</a></li>
                 <li><a href="../Vistas/registroStock.php">Stock de productos</a></li>
-                <li><a href="../Vistas/registroEntrada.php">Entradas</a></li>
-                <li><a href="../Vistas/registroSalida.php">Salidas</a></li>
+                <li><a href="../Vistas/producto_proveedor.php">Producto/Proveedor</a></li>
             </ul>
             <a href="../index.php" class="cerrar-btn">Cerrar sesión</a>
         </nav>

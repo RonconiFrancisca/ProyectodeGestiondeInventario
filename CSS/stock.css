@@ -30,23 +30,31 @@ body {
 .barra-lateral ul {
     list-style: none;
     padding: 0;
+    margin-top: 15px;
 }
 
 .barra-lateral ul li {
-    margin-bottom: 15px;
+    margin-bottom: 0; 
 }
 
 .barra-lateral ul li a {
+    font-family: Tahoma, Geneva, sans-serif; 
+    display: block; /* Hace que el enlace ocupe todo el ancho del li */
     text-decoration: none;
+    padding: 10px 20px; /*tamaño de botón */
+    border-radius: 2px; /* Bordes redondeados */
+    margin-bottom: 4px; /* Separación entre cada "botón" */
     color: #f0f0f0;
-    font-size: 16px;
+    background-color: transparent; /* Fondo transparente por defecto */
+    font-size: 15px;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif;
-    transition: color 0.2s;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .barra-lateral ul li a:hover {
-    color: #00bfff;
+    color: #1e1e2f; /* Cambia el color del texto*/
+    background-color: #00bfff;
+    transform: translateX(5px); 
 }
 
 .cerrar-btn {
@@ -129,12 +137,12 @@ table td:nth-child(n+3) {
     text-align: center; /* centra los botones dentro de cada celda */
 }
 
-table tr:nth-child(even) {
+table tr {
     background-color: #c2e2f3;
-    
 }
-
-
+table tr:hover {
+    background-color: #b0d8f0; 
+}
 
 .contenido-principal p {
     color: #666;

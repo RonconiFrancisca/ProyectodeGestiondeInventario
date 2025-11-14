@@ -3,6 +3,7 @@ include_once __DIR__.'/../DataBase.php';
 include_once __DIR__.'/../Clases/Producto.php';
 include_once __DIR__.'/../Clases/Marca.php';
 include_once __DIR__.'/../Clases/Categoria.php';
+include_once __DIR__.'/../Clases/Proveedor.php'; 
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -19,6 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $precio_nuevo = $_POST['precio_nuevo'];
         $id_marca_nueva = $_POST['marca_nueva'];
         $id_categoria_nueva = $_POST['categoria_nueva'];
+        $id_proveedor_nuevo = $_POST['proveedor_nueva']; 
 
         Producto::editarProducto(
             $bd,
@@ -28,7 +30,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $descripcion_nuevo,
             $precio_nuevo,
             $id_marca_nueva,
-            $id_categoria_nueva
+            $id_categoria_nueva,
+            $id_proveedor_nuevo 
         );
     }
 
@@ -39,6 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nuevo_precio = $_POST['nuevo_precio'];
         $nueva_marca = $_POST['nueva_marca'];
         $nueva_categoria = $_POST['nueva_categoria'];
+        $nuevo_proveedor = $_POST['nuevo_proveedor']; 
 
         Producto::subirProducto(
             $bd,
@@ -47,7 +51,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $nueva_descripcion,
             $nuevo_precio,
             $nueva_marca,
-            $nueva_categoria
+            $nueva_categoria,
+            $nuevo_proveedor 
         );
     }
 }
@@ -55,6 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 $producto = Producto::obtenerProductosConDetalles($bd);
 $marcas = Marca::obtenerMarca($bd);
 $categorias = Categoria::obtenerCategoria($bd);
+$proveedores = Proveedor::obtenerProveedor($bd); 
 ?>
 
 <!DOCTYPE html>
@@ -64,24 +70,24 @@ $categorias = Categoria::obtenerCategoria($bd);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
     <link rel="stylesheet" href="../CSS/producto.css">
-    <link rel="stylesheet" href="../CSS/editarProducto.css">
 </head>
 <body>
 <div class="contenedor-general">
     <nav class="barra-lateral">
         <h2>Menú</h2>
         <ul>
-            <li><a href="../Vistas/paginaInicio.php">Inicio</a></li>
-            <li><a href="../Vistas/crudProducto.php">Productos</a></li>
-            <li><a href="../Vistas/crudMarca.php">Marcas</a></li>
-            <li><a href="../Vistas/crudCategoria.php">Categorías</a></li>
-            <li><a href="../Vistas/crudRol.php">Roles</a></li>
-            <li><a href="../Vistas/crudUsuario.php">Usuarios</a></li>
-            <li><a href="../Vistas/crudProveedor.php">Proveedores</a></li>
-            <li><a href="../Vistas/historialMovimientos.php">Historial de Movimientos</a></li>
-            <li><a href="../Vistas/registroStock.php">Stock de productos</a></li>
-            <li><a href="../Vistas/registroEntrada.php">Entradas</a></li>
-            <li><a href="../Vistas/registroSalida.php">Salidas</a></li>
+                <li><a href="../Vistas/paginaInicio.php">Inicio</a></li>
+                <li><a href="../Vistas/crudProducto.php">Productos</a></li>
+                <li><a href="../Vistas/registroEntrada.php">Entradas</a></li>
+                <li><a href="../Vistas/registroSalida.php">Salidas</a></li>
+                <li><a href="../Vistas/crudMarca.php">Marcas</a></li>
+                <li><a href="../Vistas/crudCategoria.php">Categorías</a></li>
+                <li><a href="../Vistas/crudRol.php">Roles</a></li>
+                <li><a href="../Vistas/crudUsuario.php">Usuarios</a></li>
+                <li><a href="../Vistas/crudProveedor.php">Proveedores</a></li>
+                <li><a href="../Vistas/historialMovimientos.php">Historial de Movimientos</a></li>
+                <li><a href="../Vistas/registroStock.php">Stock de productos</a></li>
+                <li><a href="../Vistas/producto_proveedor.php">Producto/Proveedor</a></li>
         </ul>
         <a href="../index.php" class="cerrar-btn">Cerrar sesión</a>
     </nav>
@@ -165,6 +171,11 @@ $categorias = Categoria::obtenerCategoria($bd);
                     <?php foreach($categorias as $c){ echo '<option value="'.$c['id_categoria'].'">'.$c['nombre'].'</option>'; } ?>
                 </select>
 
+                <select name="proveedor_nueva" id="proveedor_nueva" required>
+                    <option value="">Seleccione Proveedor</option>
+                    <?php foreach($proveedores as $prov){ echo '<option value="'.$prov['id_proveedor'].'">'.$prov['nombre'].'</option>'; } ?>
+                </select>
+
                 <button type="submit" name="editar_guardar">Guardar</button>
                 <button type="button" name="cancelar"  onclick="cerrarVentana()">Cancelar</button>
                 </form>
@@ -188,6 +199,10 @@ $categorias = Categoria::obtenerCategoria($bd);
                 <select name="nueva_categoria" required>
                     <option value="">Seleccione Categoría</option>
                     <?php foreach($categorias as $c){ echo '<option value="'.$c['id_categoria'].'">'.$c['nombre'].'</option>'; } ?>
+                </select>
+                <select name="nuevo_proveedor" required>
+                    <option value="">Seleccione Proveedor</option>
+                    <?php foreach($proveedores as $prov){ echo '<option value="'.$prov['id_proveedor'].'">'.$prov['nombre'].'</option>'; } ?>
                 </select>
 
                 <button type="submit" name="crear_guardar">Guardar</button>

@@ -14,21 +14,21 @@ class Usuario{
         $this->nombre = $nombre;
         $this->apellido = $apellido;
     }
-
-    // 🟢 CREAR USUARIO
-    public static function subirUsuario($bd, $email, $clave, $nombre, $apellido, $id_rol) {
+    
+    public static function subirUsuario($bd, $nuevo_email, $nuevo_nombre, $nuevo_apellido, $nuevo_rol, $clave_nueva) {
         try {
-            $hash_clave = password_hash($clave, PASSWORD_DEFAULT); 
+            $hash_clave = password_hash($clave_nueva, PASSWORD_DEFAULT); 
+            
             $sql = "INSERT INTO usuario (email, clave, nombre, apellido, id_rol)
-                    VALUES (:email, :clave, :nombre, :apellido, :id_rol)";
+                        VALUES (:email, :clave, :nombre, :apellido, :id_rol)";
 
             $resultado = $bd->prepare($sql);
             
-            $resultado->bindParam(":email", $email, PDO::PARAM_STR);
+            $resultado->bindParam(":email", $nuevo_email, PDO::PARAM_STR);
             $resultado->bindParam(":clave", $hash_clave);
-            $resultado->bindParam(":nombre", $nombre, PDO::PARAM_STR);
-            $resultado->bindParam(":apellido", $apellido, PDO::PARAM_STR);
-            $resultado->bindParam(":id_rol", $id_rol, PDO::PARAM_INT);
+            $resultado->bindParam(":nombre", $nuevo_nombre, PDO::PARAM_STR);
+            $resultado->bindParam(":apellido", $nuevo_apellido, PDO::PARAM_STR);
+            $resultado->bindParam(":id_rol", $nuevo_rol, PDO::PARAM_INT);
             
             return $resultado->execute();
         } catch (PDOException $e) {
@@ -36,7 +36,6 @@ class Usuario{
         }
     }
 
-    // 🔑 VERIFICAR CLAVE
     public function verificarClave($bd,$email,$clave){
         $sql="SELECT * FROM usuario WHERE email=:email";
         $verificar_clave=$bd->prepare($sql);
@@ -53,52 +52,38 @@ class Usuario{
         }
     }
     
-    // 🔑 CAMBIAR CLAVE
-    public static function cambiarClave($bd, $email, $clave_nueva) {
-        try {
-            $clave_hasheada = password_hash($clave_nueva, PASSWORD_DEFAULT); 
-            $sql = "UPDATE usuario SET clave = :clave_hasheada WHERE email = :email"; 
-            
+    public static function editarUsuario($bd, $nuevo_email, $nuevo_nombre, $nuevo_apellido, $nuevo_rol, $clave_nueva, $id_usuario) {
+        if (empty($clave_nueva)) {
+            $sql = "UPDATE usuario SET email = :nuevo_email,nombre = :nuevo_nombre,
+                    apellido = :nuevo_apellido,id_rol = :nuevo_rol
+                    WHERE id_usuario = :id_usuario";
+
             $resultado = $bd->prepare($sql);
-            $resultado->bindParam(':clave_hasheada', $clave_hasheada);
-            $resultado->bindParam(':email', $email);
-            
-            return $resultado->execute();
-        } catch (PDOException $e) {
-            return false;
+
+            $resultado->bindParam(':nuevo_email', $nuevo_email);
+            $resultado->bindParam(':nuevo_nombre', $nuevo_nombre);
+            $resultado->bindParam(':nuevo_apellido', $nuevo_apellido);
+            $resultado->bindParam(':nuevo_rol', $nuevo_rol);
+            $resultado->bindParam(':id_usuario', $id_usuario);
+
+        } else {
+            $nueva_clave_hasheada = password_hash($clave_nueva, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE usuario SET email = :nuevo_email, nombre = :nuevo_nombre,apellido = :nuevo_apellido,
+                    id_rol = :nuevo_rol, clave = :nueva_clave_hasheada
+                    WHERE id_usuario = :id_usuario";
+
+            $resultado = $bd->prepare($sql);
+
+            $resultado->bindParam(':nuevo_email', $nuevo_email);
+            $resultado->bindParam(':nuevo_nombre', $nuevo_nombre);
+            $resultado->bindParam(':nuevo_apellido', $nuevo_apellido);
+            $resultado->bindParam(':nuevo_rol', $nuevo_rol);
+            $resultado->bindParam(':nueva_clave_hasheada', $nueva_clave_hasheada);
+            $resultado->bindParam(':id_usuario', $id_usuario);
         }
-    }
-
-    public static function editarUsuario($bd, $id_usuario, $email_nuevo, $nombre_nuevo, $apellido_nuevo, $id_rol_nuevo, $clave_nueva = null) {
-        try {
-            $sql = "UPDATE usuario SET 
-                    email = :email_nuevo, 
-                    nombre = :nombre_nuevo, 
-                    apellido = :apellido_nuevo, 
-                    id_rol = :id_rol_nuevo";
-            
-            $params = [
-                ':id_usuario' => $id_usuario,
-                ':email_nuevo' => $email_nuevo,
-                ':nombre_nuevo' => $nombre_nuevo,
-                ':apellido_nuevo' => $apellido_nuevo,
-                ':id_rol_nuevo' => $id_rol_nuevo
-            ];
-
-            if (!empty($clave_nueva)) {
-                $clave_hasheada = password_hash($clave_nueva, PASSWORD_DEFAULT);
-                $sql .= ", clave = :clave_hasheada";
-                $params[':clave_hasheada'] = $clave_hasheada;
-            }
-
-            $sql .= " WHERE id_usuario = :id_usuario";
-
-            $stmt = $bd->prepare($sql);
-            return $stmt->execute($params);
-
-        } catch (PDOException $e) {
-            return false;
-        }
+        
+        return $resultado->execute();
     }
 
     public function buscarUsuario($bd,$email){

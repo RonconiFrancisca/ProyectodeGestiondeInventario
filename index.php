@@ -30,13 +30,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar sesión</title>
   <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
  
   <div class="col-izquierda">
-      <h5 class="sistema">FREE-<br>STOCK</h5>
+      <h5 class="sistema">GE-<br>STOCK</h5>
       <div class="contenedor-imagen">
           <img class="imagen" src="../CSS/imagenes/gestion-de-stock.png" alt="">
       </div>
@@ -48,9 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <input type="email" name="email" placeholder="Correo electrónico" required>
           <input type="password" name="clave" placeholder="Contraseña" required>
           <button type="submit">Ingresar</button>
-          <?php if (isset($error)): ?>
-              <p style="color:red;"><?= $error ?></p>
-          <?php endif; ?>
+            <?php if (isset($error)){
+                    echo '<p style="color:red;">'.$error.'</p>';
+                    } 
+            ?>
+             <p>¿No tenes una cuenta creada? <a href="registrarse.php">Registrate acá</a></p>
       </form>
   </div>
 

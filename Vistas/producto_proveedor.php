@@ -1,8 +1,9 @@
 <?php
 include_once __DIR__ . '/../DataBase.php';
-include_once __DIR__ . '/../Clases/Movimiento.php';
+include_once __DIR__ . '/../Clases/Producto.php';
 
-$movimientos = Movimiento::obtenerMovimientos($bd);
+// Usamos la nueva función obtenerProductosConProveedor
+$productos_con_proveedor = Producto::obtenerProductosConProveedor($bd);
 ?>
 
 <!DOCTYPE html>
@@ -10,8 +11,8 @@ $movimientos = Movimiento::obtenerMovimientos($bd);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historial de Movimientos</title>
-    <link rel="stylesheet" href="../CSS/movimientos.css">
+    <title>Productos y Proveedores</title>
+    <link rel="stylesheet" href="../CSS/producto_proveedor.css"> 
 </head>
 <body>
     <div class="contenedor-general">
@@ -33,45 +34,34 @@ $movimientos = Movimiento::obtenerMovimientos($bd);
             </ul>
             <a href="../index.php" class="cerrar-btn">Cerrar sesión</a>
         </nav>
+
         <div class="contenido-principal">
-            <h1>Historial de Movimientos</h1>
-            <div class="contenido">
-                <form action="PDFhistorial.php" method="post" target="_blank">
-                    <button type="submit">Generar PDF</button>
-                </form>
+            <h1>Listado de Productos y Proveedores</h1>
+            <div id="contenido">
                 <table>
                     <tr>
-                        <th>ID Movimiento</th>
                         <th>Código Producto</th>
                         <th>Nombre Producto</th>
-                        <th>Cantidad</th>
-                        <th>Tipo</th>
-                        <th>Fecha</th>
-                        <th>Precio Unitario</th>
-                        <th>Total</th>
+                        <th>Marca</th>
+                        <th>Proveedor</th>
                     </tr>
                     <?php
-                    if ($movimientos) {
-                        foreach ($movimientos as $m) {
-                            $tipo = $m['ingreso'] ? 'Entrada' : 'Salida';
-                            echo '<tr>
-                                    <td>'.$m["id_movimiento"].'</td>
-                                    <td>'.$m["codigo"].'</td>
-                                    <td>'.$m["nombre_producto"].'</td>
-                                    <td>'.$m["cantidad"].'</td>
-                                    <td>'.$tipo.'</td>
-                                    <td>'.$m["fecha"].'</td>
-                                    <td>$'.number_format($m["precio"], 2).'</td>
-                                    <td>$'.number_format($m["total"], 2).'</td>
-                                </tr>';
+                        if($productos_con_proveedor){
+                            foreach($productos_con_proveedor as $p){
+                                echo '<tr>
+                                        <td>'.$p["codigo"].'</td>
+                                        <td>'.$p["nombre"].'</td>
+                                        <td>'.$p["marca_nombre"].'</td>
+                                        <td>'.$p["proveedor_nombre"].'</td>
+                                      </tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="4">No hay productos registrados.</td></tr>';
                         }
-                    } else {
-                        echo '<tr><td colspan="8">No hay movimientos registrados</td></tr>';
-                    }
                     ?>
                 </table>
             </div>
-        </div>    
+        </div>
     </div>
 </body>
 </html>
