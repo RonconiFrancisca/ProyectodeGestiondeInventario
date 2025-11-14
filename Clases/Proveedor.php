@@ -15,7 +15,7 @@ class Proveedor{
 
     }
 
-    public function subirProveedor($bd) {
+    public static function subirProveedor($bd) {
         $consulta_subir= "INSERT INTO proveedor (nombre, telefono, direccion, cuit)
         VALUES (:nombre, :telefono, :direccion, :cuit)";
         $subir_producto =$bd->prepare($consulta_subir);
@@ -41,17 +41,23 @@ class Proveedor{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarProveedor($bd) {
-        $sql = "UPDATE proveedor SET nombre = :nombre, cuit = :cuit, direccion = :direccion, 
-                    telefono = :telefono WHERE id_proveedor = :id_proveedor";
-        
-        $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':nombre', $this->nombre); 
-        $resultado->bindParam(':telefono', $this->telefono);
-        $resultado->bindParam(':direccion', $this->direccion);
-        $resultado->bindParam(':cuit', $this->cuit); 
-        $resultado->bindParam(':id_proveedor', $this->id_proveedor);    
-        $resultado->execute();
+    public static function editarProveedor($bd, $id_proveedor, $nombre_nuevo, $cuit_nuevo, $direccion_nueva, $telefono_nuevo) {
+            $sql = "UPDATE proveedor SET 
+                    nombre = :nombre, 
+                    cuit = :cuit, 
+                    direccion = :direccion, 
+                    telefono = :telefono 
+                    WHERE id_proveedor = :id_proveedor";
+            
+            $resultado = $bd->prepare($sql);
+            
+            $resultado->bindParam(':nombre', $nombre_nuevo); 
+            $resultado->bindParam(':cuit', $cuit_nuevo); 
+            $resultado->bindParam(':direccion', $direccion_nuevo);
+            $resultado->bindParam(':telefono', $telefono_nuevo);
+            $resultado->bindParam(':id_proveedor', $id_proveedor); 
+            
+            return $resultado->execute();
     }
 
     public static function eliminarProveedor($bd,$id_proveedor){

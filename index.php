@@ -34,14 +34,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
-  <form method="POST" class="form-login">
-    <h2>Iniciar sesión</h2>
-    <input type="email" name="email" placeholder="Correo electrónico" required>
-    <input type="password" name="clave" placeholder="Contraseña" required>
-    <button type="submit">Entrar</button>
-    <?php if (isset($error)): ?>
-      <p style="color:red;"><?= $error ?></p>
-    <?php endif; ?>
-  </form>
+ 
+  <div class="col-izquierda">
+      <h5 class="sistema">FREE-<br>STOCK</h5>
+      <div class="contenedor-imagen">
+          <img class="imagen" src="../CSS/imagenes/gestion-de-stock.png" alt="">
+      </div>
+  </div>
+
+  <div class="form-wrapper">
+      <form method="POST" class="form-login">
+          <h1 class="titulo">Iniciar sesión</h1>
+          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <input type="password" name="clave" placeholder="Contraseña" required>
+          <button type="submit">Ingresar</button>
+          <?php if (isset($error)): ?>
+              <p style="color:red;"><?= $error ?></p>
+          <?php endif; ?>
+      </form>
+  </div>
+
+
 </body>
 </html>

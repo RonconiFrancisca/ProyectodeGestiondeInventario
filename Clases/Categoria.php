@@ -23,18 +23,19 @@ class Categoria{
     }
 
     public static function obtenerCategoria($bd){
-        $sql = "SELECT * FROM categoria" ;
+        $sql = "SELECT * FROM categoria";
         $resultado = $bd->prepare($sql);
         $resultado->execute();
-        return $resultado;
+        return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarCategoria($bd) {
+
+    public static function editarCategoria($bd,$id_categoria,$nombre_nuevo) {
         $sql = "UPDATE categoria SET nombre = :nombre WHERE id_categoria = :id_categoria";
         
         $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':nombre', $this->nombre);
-        $resultado->bindParam(':id_categoria', $this->id_categoria);
+        $resultado->bindParam(':nombre', $nombre_nuevo);
+        $resultado->bindParam(':id_categoria', $id_categoria);
         
         $resultado->execute();
     }

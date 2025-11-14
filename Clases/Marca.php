@@ -29,12 +29,12 @@ class Marca{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarMarca($bd) {
+    public static function editarMarca($bd,$id_marca,$nombre_nuevo) {
         $sql = "UPDATE marca SET nombre = :nombre WHERE id_marca = :id_marca";
         
         $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':nombre', $this->nombre);
-        $resultado->bindParam(':id_marca', $this->id_marca);
+        $resultado->bindParam(':nombre', $nombre_nuevo);
+        $resultado->bindParam(':id_marca', $id_marca);
         
         $resultado->execute();
     }

@@ -1,35 +1,30 @@
-* {
-    box-sizing: border-box;
+body {
+    font-family: "Montserrat", sans-serif;
+    background: #f0f2f5;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background-color: #f4f4f4;
-    min-height: 100vh;
-}
-
 .contenedor-general {
     display: flex;
-    flex-wrap: wrap;
     min-height: 100vh;
 }
 
-/*Barra lateral*/
 .barra-lateral {
-    flex: 0 0 220px;
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-    height: 100vh;
-    overflow-y: auto;
+    width: 220px;
+    background-color: #1e1e2f;
+    color: #e2edf8;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .barra-lateral h2 {
-    text-align: center;
-    font-size: 20px;
+    margin-top: 0;
     margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #00bfff;
+    font-family: "Montserrat", sans-serif;
 }
 
 .barra-lateral ul {
@@ -37,153 +32,145 @@ body {
     padding: 0;
 }
 
+.barra-lateral ul li {
+    margin-bottom: 15px;
+}
+
 .barra-lateral ul li a {
-    display: block;
-    color: white;
     text-decoration: none;
-    padding: 12px 20px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    color: #f0f0f0;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    transition: color 0.2s;
 }
 
 .barra-lateral ul li a:hover {
-    background-color: #111;
+    color: #00bfff;
 }
-/*Boton cerrar sesion*/
+
 .cerrar-btn {
-    margin-top: 5rem;
-    margin-left: 2rem;
-    display: inline-block;
-    padding: 10px 16px;
-    background-color: #910909;
-    color: white;
+    display: block;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #f3374a;
+    color: #f8dbdb;
+    text-align: center;
     text-decoration: none;
     border-radius: 6px;
-    font-weight: bold;
-    transition: background-color 0.2s;
 }
 
 .cerrar-btn:hover {
-    background-color: #530808;
+    background-color: #610710;
+    transform: scale(1.03);
 }
 
-/* Contenido general*/
-.contenedor-general > div:not(.barra-lateral) {
+.contenido-principal {
     flex: 1;
     padding: 30px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
-h1 {
+.contenido-principal h1 {
+    font-size: 32px;
     text-align: center;
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 10px; /* espacio entre el título y los botones */
+    margin: 0 0 20px 0;
+    color: #1a1a2e;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
 }
 
-p {
-    font-size: 16px;
-    color: #444;
-    margin-top: 20px;
-}
-
-/* Acciones*/
 .contenedor-acciones {
     display: flex;
-    justify-content: flex-end; /*los manda al lado derecho */
+    justify-content: flex-end;
     margin-bottom: 20px;
-    padding-right: 30px; /* separación del borde derecho */
 }
 
-.acciones {
-    display: flex;
-    gap: 10px; /* espacio entre los botones */
-}
-
-.accion-box {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 12px 20px;
+button.crear {
+    padding: 10px 20px;
+    background-color: #92d3f8;
+    color: #0a023b;
+    border: none;
     border-radius: 6px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
-.accion-box a {
-    text-decoration: none;
-    color: #0078d7;
-    font-weight: bold;
+button.crear:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
 }
 
-.accion-box:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-}
-
-/*Tabla de marca*/
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-th, td {
-    padding: 12px 16px;
+table th, table td {
+    padding: 12px;
     border-bottom: 1px solid #ddd;
     text-align: left;
+    font-family: "Montserrat", sans-serif;
 }
 
-th {
-    background-color: #0078d7;
-    color: white;
-    font-weight: normal;
+table th {
+    background-color: #0c1f33;
+    color: #fff;
+    font-weight: 600;
 }
-
-tr:hover {
-    background-color: #f9f9f9;
-}
-
-th:last-child {
+table th[colspan="2"] {
     text-align: center;
 }
-
-td:last-child {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+table td:nth-child(n+3) {
+    text-align: center; /* centra los botones dentro de cada celda */
 }
 
+table tr:nth-child(even) {
+    background-color: #c2e2f3;
+}
 
-/*Boton Eliminar */
 button.eliminar {
-    background-color: #dc3545;
-    color: white;
+    padding: 6px 12px;
+    background-color: #ffa1aa;
+    color: #fff;
     border: none;
-    padding: 8px 14px;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
 }
 
 button.eliminar:hover {
-    background-color: #b02a37;
+    background-color: #c82333;
+    transform: scale(1.03);
 }
 
-/*Boton Editar */
 button.editar {
-    background-color: #dc9435;
-    color: white;
+    padding: 6px 12px;
+    background-color: #6de78a;
+    color: #fff;
     border: none;
-    padding: 8px 14px;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
 }
 
 button.editar:hover {
-    background-color: #d36409;
+    background-color: #0d6320;
+    transform: scale(1.03);
 }
 
+.contenido-principal p {
+    color: #666;
+    font-size: 16px;
+    margin-top: 20px;
+    font-family: "Montserrat", sans-serif;
+}

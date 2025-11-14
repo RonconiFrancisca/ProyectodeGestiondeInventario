@@ -29,12 +29,12 @@ class Rol{
         return $resultado->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function editarRol($bd) {
+    public static function editarRol($bd,$id_rol,$nombre_nuevo) {
         $sql = "UPDATE rol SET nombre = :nombre WHERE id_rol = :id_rol";
         
         $resultado = $bd->prepare($sql);
-        $resultado->bindParam(':nombre', $this->nombre);
-        $resultado->bindParam(':id_rol', $this->id_rol);
+        $resultado->bindParam(':nombre', $nombre_nuevo);
+        $resultado->bindParam(':id_rol', $id_rol);
         
         $resultado->execute();
     }

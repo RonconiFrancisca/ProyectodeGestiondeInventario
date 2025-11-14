@@ -1,0 +1,80 @@
+.ventana {                            
+    display: none;                        /* oculto por defecto */
+    position: fixed;                      /* posición fija */
+    top: 0;                               /* arriba */
+    left: 0;                              /* izquierda */
+    width: 100%;                          /* ancho completo */
+    height: 100%;                         /* alto completo */
+    background-color: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
+    justify-content: center;              /* centrar horizontal */
+    align-items: center;                  /* centrar vertical */
+}
+
+.ventana_contenido {                
+    background-color: #fff;               /* fondo ventana */
+    padding: 25px 30px;                   /* padding interno */
+    border-radius: 8px;                   /* bordes redondeados */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); /* sombra */
+    width: 500px;                         /* ancho ventana */
+    text-align: center;                   /* centrar contenido */
+}
+
+.ventana_contenido h2 {              
+    margin: 0 0 20px;                     /* espacio inferior */
+    font-size: 22px;                      /* tamaño título */
+    color: #060014;                       /* color título */
+}
+
+.ventana_contenido input[type="text"] {  
+    width: 90%;                           /* ancho input */
+    padding: 10px;                        /* padding interno */
+    margin-bottom: 20px;                  /* separación inferior */
+    border: 1px solid #03073d;            /* borde */
+    border-radius: 8px;                   /* bordes redondeados */
+    font-size: 16px;                      /* tamaño texto */
+}
+
+.ventana_contenido input[type="text"]:focus { 
+    border-color: #007bff;                /* borde azul al enfocar */
+    outline: none;                        /* quitar outline */
+}
+
+.ventana_contenido button {          
+    padding: 10px 18px;                   /* padding botón */
+    margin: 5px;                          /* margen entre botones */
+    border: none;                         /* sin borde */
+    border-radius: 8px;                   /* bordes redondeados */
+    cursor: pointer;                      /* cursor mano */
+    font-size: 15px;                      /* tamaño texto */
+    transition: background-color 0.2s, transform 0.1s; /* transición */
+}
+
+button[name="editar_guardar"] {           
+    background-color: #8bcae7;            
+    color: rgb(32, 30, 30);                         
+}
+
+button[name="editar_guardar"]:hover {     
+    background-color: #0a2f47; 
+    transform: scale(1.03);           
+}
+
+button[name="crear_guardar"] {           
+    background-color: #6cc0e7;            
+    color: rgb(32, 30, 30);                         
+}
+
+button[name="crear_guardar"]:hover {     
+    background-color: #0a2f47; 
+    transform: scale(1.03);           
+}
+
+button[name="cancelar"] {           
+    background-color: #b4554e;            
+    color: rgb(24, 21, 21);                         
+}
+
+button[name="cancelar"]:hover {     
+    background-color: #6b0808; 
+    transform: scale(1.03);           
+}

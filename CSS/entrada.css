@@ -89,6 +89,23 @@ body {
     margin-bottom: 20px;
 }
 
+button.crear {
+    padding: 10px 20px;
+    background-color: #92d3f8;
+    color: #0a023b;
+    border: none;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button.crear:hover {
+    background-color: #0056b3;
+    transform: scale(1.03);
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -123,21 +140,3 @@ table tr:nth-child(even) {
     margin-top: 20px;
     font-family: "Montserrat", sans-serif;
 }
-
-button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #b0c5c9; /* color azul verdoso para PDF */
-    color: #161414;
-    border: none;
-    border-radius: 10px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-}
-
-button[type="submit"]:hover {
-    background-color: #516669;
-    transform: scale(1.03); /* ligero efecto de zoom al pasar el mouse */
-}
-
